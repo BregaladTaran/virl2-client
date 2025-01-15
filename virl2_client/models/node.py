@@ -147,11 +147,10 @@ class Node:
 	def __repr__(self):
 		return (
 			f"{self.__class__.__name__}("
-			f"'{str(self._lab)}', "
-			f"'{self._id}', "
-			f"'{self._label}', "
-			f"'{self._node_definition}', "
-			f"'{self._image_definition}')"
+			f"{str(self._lab)!r}, "
+			f"{self._id!r}, "
+			f"{self._label!r}, "
+			f"{self._node_definition!r})"
 		)
 
 	def __eq__(self, other):

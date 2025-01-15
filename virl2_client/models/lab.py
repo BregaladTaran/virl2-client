@@ -199,14 +199,11 @@ class Lab:
         return f"Lab: {self._title}{' (STALE)' if self._stale else ''}"
 
     def __repr__(self):
-        return "{}({!r}, {!r}, {!r}, {!r}, {!r}, {!r})".format(
-            self.__class__.__name__,
-            self._title,
-            self._id,
-            self._session.base_url.path,
-            self.auto_sync,
-            self.auto_sync_interval,
-            self.wait_for_convergence,
+        return(
+            f"{self.__class__.__name__}("
+            f"{self._title!r}, "
+            f"{self._id!r}, "
+            f"{self._session.base_url.path!r})"
         )
 
     def _url_for(self, endpoint, **kwargs):
