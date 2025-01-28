@@ -96,11 +96,7 @@ class SmartAnnotation:
         )
 
     def __repr__(self):
-        return (
-            f"{self.__class__.__name__}("
-            f"{str(self._lab)!r}, "
-            f"{self._id!r})"
-        )
+        return f"{self.__class__.__name__}(" f"{str(self._lab)!r}, " f"{self._id!r})"
 
     def __eq__(self, other: object):
         if not isinstance(other, SmartAnnotation):

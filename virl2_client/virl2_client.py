@@ -319,10 +319,7 @@ class ClientLibrary:
             self.start_event_listening()
 
     def __repr__(self):
-        return (
-            f"{self.__class__.__name__}("
-            f"{self.url!r})"
-        )
+        return f"{self.__class__.__name__}(" f"{self.url!r})"
 
     def __str__(self):
         return f"{self.__class__.__name__} URL: {self._session.base_url}"

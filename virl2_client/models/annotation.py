@@ -159,7 +159,7 @@ class Annotation:
 
     def __repr__(self):
         return (
-			f"{self.__class__.__name__}("
+            f"{self.__class__.__name__}("
             f"{str(self._lab)!r}, "
             f"{self._id!r}, "
             f"{self._type!r})"

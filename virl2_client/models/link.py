@@ -87,7 +87,7 @@ class Link:
         return f"Link: {self._label}{' (STALE)' if self._stale else ''}"
 
     def __repr__(self):
-        return(
+        return (
             f"{self.__class__.__name__}("
             f"{str(self._lab)!r}, "
             f"{self._id!r}, "
