@@ -605,10 +605,15 @@ class Lab:
         else:
             url = self._url_for("nodes")
 
-        kwargs["label"] = label
-        kwargs["node_definition"] = node_definition
-        kwargs["x"] = x
-        kwargs["y"] = y
+        kwargs.update(
+            {
+                "label": label,
+                "node_definition": node_definition,
+                "x": x,
+                "y": y,
+            }
+        )
+
         result: dict[str, str] = self._session.post(url, json=kwargs).json()
         node_id: str = result["id"]
 
@@ -645,53 +650,19 @@ class Lab:
 
     @locked
     def _create_node_local(
-        self,
-        node_id: str,
-        label: str,
-        node_definition: str,
-        image_definition: str | None,
-        configuration: list[dict[str, str]] | str | None,
-        x: int,
-        y: int,
-        ram: int | None = None,
-        cpus: int | None = None,
-        cpu_limit: int | None = None,
-        data_volume: int | None = None,
-        boot_disk_size: int | None = None,
-        hide_links: bool = False,
-        tags: list | None = None,
-        compute_id: str | None = None,
-        resource_pool: ResourcePool | None = None,
-        parameters: dict = {},
-        pinned_compute_id: str | None = None,
+        self, node_id: str, label: str, node_definition: str, **kwargs
     ) -> Node:
         """Helper function to add a node to the client library."""
-        if tags is None:
-            tags = []
+        if "tags" not in kwargs:
+            kwargs["tags"] = []
 
-        node = Node(
-            self,
-            node_id,
-            label,
-            node_definition,
-            image_definition,
-            configuration,
-            x,
-            y,
-            ram,
-            cpus,
-            cpu_limit,
-            data_volume,
-            boot_disk_size,
-            hide_links,
-            tags,
-            resource_pool,
-            parameters,
-            pinned_compute_id,
-        )
+        node = Node(self, node_id, label, node_definition, **kwargs)
+
+        compute_id = kwargs.get("compute_id")
         if compute_id is not None:
             node._compute_id = compute_id
-        self._nodes[node.id] = node
+
+        self._nodes[node_id] = node
         return node
 
     @check_stale
